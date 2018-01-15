@@ -1,0 +1,51 @@
+{% extends 'home.html' %}
+{% block content %}
+{% for v in page_data%}
+<div class="fh5co-entry padding">
+    <img src="{{url_for('static',filename='images/project-1.jpg') }}"
+         alt="Free HTML5 Bootstrap Template by FreeHTML5.co">
+    <div>
+        <span class="fh5co-post-date">{{ time }}</span>
+        <h2></h2>
+        <span>{{ v|safe }}</span>
+        {% if pre_page%2==0 %}
+        <p>
+            <br>---------------------------我是正经的分界线---------------------------
+        </p>
+        {% else %}
+        <p>
+            <br>---------------------------我是苦逼的分界线---------------------------
+        </p>
+        {% endif %}
+    </div>
+</div>
+{%endfor%}
+<div class="box-footer clearfix">
+    <ul class="pagination pagination-sm no-margin pull-right">
+        <li><a href="{{ url_for('home.hello',page=1) }}">首页</a></li>
+        {% if page!=1 %}
+        <li><a href="{{ url_for('home.hello',page=pre_page) }}">上一页</a></li>
+        {% else %}
+        <li class="disabled"><a href="#">上一页</a></li>
+        {% endif %}
+        {% for v in pagenum %}
+        {% if v %}
+        {% if v != page %}
+        <li><a href="{{ url_for('home.hello',page=v) }}">{{ v }}</a></li>
+        {% else %}
+        <li class="active"><a href="#">{{ v }}</a></li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% if page!=count %}
+        <li><a href="{{ url_for('home.hello',page=next_page) }}">下一页</a></li>
+        {% else %}
+        <li class="disabled"><a href="#">下一页</a></li>
+        {% endif %}
+        <li><a href="{{ url_for('home.hello',page=count) }}">尾页</a></li>
+    </ul>
+</div>
+{% endblock %}
+{% block js %}
+
+{% endblock %}
